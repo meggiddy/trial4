@@ -5,10 +5,8 @@ import {
 } from "next";
 import { Key } from "react";
 
-type User = { id: Key | null | undefined; name: string };
-type Data = { user: Record<string, string>[] };
 
-export const Home: NextPage = async () => {
+export const Home = async () => {
   let users;
   try {
     const response = await fetch(
@@ -32,9 +30,8 @@ export const Home: NextPage = async () => {
       throw new Error("Network response was not ok");
     }
     const result = await response.json();
-    const data: Data = result.data;
-    console.log(result);
-    console.log(data);
+    const data = result.data;
+
     users = data?.users;
   } catch (error) {
     console.error("Fetch Error:", error);
