@@ -21,7 +21,7 @@ export default async function Home() {
             "lguuBuAMyVbQITmkq5oK3AbzLL17KJtrscmdAqhnqpWbcaBHwEFnmSNVJnwVL1fm",
         },
         body: JSON.stringify({
-          query: `query{
+          query: `query @cached(ttl: 60){
           users{
             name
           }
