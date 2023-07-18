@@ -1,12 +1,15 @@
-import {
-  InferGetServerSidePropsType,
-  GetServerSideProps,
-  NextPage,
-} from "next";
 import { Key } from "react";
 
+type User = { id: Key | null | undefined; name: string };
+type Data = { users: User[] };
 
-export const Home = async () => {
+
+interface HomeProps {
+  users: Record<string, string>[];
+}
+
+
+export default async function Home() {
   let users;
   try {
     const response = await fetch(
@@ -30,7 +33,7 @@ export const Home = async () => {
       throw new Error("Network response was not ok");
     }
     const result = await response.json();
-    const data = result.data;
+    const data = result.data as Data;
 
     users = data?.users;
   } catch (error) {
@@ -48,4 +51,4 @@ export const Home = async () => {
   );
 };
 
-export default Home;
+
